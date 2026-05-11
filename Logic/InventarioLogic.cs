@@ -1,5 +1,6 @@
 using InvetarioDeBodega.Models;
 using InvetarioDeBodega.Services;
+using System.Linq;
 
 namespace InvetarioDeBodega.Logic
 {
@@ -25,9 +26,16 @@ namespace InvetarioDeBodega.Logic
             JsonService.GuardarProductos(Productos);
         }
         // Obtener productos
-        public List<Producto> ObtenerProductos()
+      public List<Producto> ObtenerProductos()        
         {
             return Productos;
+        }
+       public Producto? BuscarProductoPorNombre(string nombre)
+        {
+            return Productos.FirstOrDefault
+            (p => p.Nombre.Trim().ToLower() ==
+            nombre.Trim().ToLower()
+            );
         }
     }
 }
