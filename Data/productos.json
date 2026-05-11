@@ -4,5 +4,11 @@
     "Categoria": "Granos",
     "Cantidad": 10,
     "Precio": 4500.0
+  },
+  {
+    "Nombre": "Aceite",
+    "Categoria": "Cocina",
+    "Cantidad": 8,
+    "Precio": 23400.0
   }
 ]

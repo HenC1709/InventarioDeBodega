@@ -1,30 +1,24 @@
-﻿using InvetarioDeBodega.Models;
+﻿using InvetarioDeBodega.Logic;
+using InvetarioDeBodega.Models;
 using InvetarioDeBodega.Services;
 
-JsonService jsonService = new JsonService();
-
-// Crear Lista
-
-List<Producto> productos = new List<Producto>();
+InvetarioLogic invetario = new InvetarioLogic();
 
 // agregar Producto 
-productos.Add(new Producto
+invetario.AgregarProductos(new Producto
 {
-    Nombre = "Arroz",
-    Categoria = "Granos",
-    Cantidad = 10,
-    Precio = 4500
+    Nombre = "Aceite",
+    Categoria = "Cocina",
+    Cantidad = 8,
+    Precio = 23400
 });
-//Guardar 
-jsonService.GuardarProductos(productos);
-Console.WriteLine("Productos Guardados. ");
-
 // Cargar 
-List<Producto> ProductosCargados = jsonService.CargarProductos();
+List<Producto> productos = invetario.ObtenerProductos();
 
-Console.WriteLine("\nPRODUCTOS CARGADOS ");
+// MOSTRAR LO GUARDADO
+Console.WriteLine("PRODUCTOS CARGADOS:\n ");
 
-foreach (var producto in ProductosCargados)
+foreach (var producto in productos)
 {
     Console.WriteLine($"Nombre: {producto.Nombre}");
     Console.WriteLine($"Categoria: {producto.Categoria}");
