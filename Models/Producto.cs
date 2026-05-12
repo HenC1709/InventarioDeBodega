@@ -6,5 +6,6 @@ namespace InvetarioDeBodega.Models
        public string Categoria { get; set; } ="";
        public int Cantidad { get; set; }
        public decimal Precio { get; set; }
+       public bool EnStock { get; set; }
     }
 }
