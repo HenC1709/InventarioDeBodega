@@ -40,10 +40,20 @@ namespace InvetarioDeBodega.Menus
                 string categoria = Console.ReadLine()!;
 
                 Console.Write("Cantidad: ");
-                int cantidad = int.Parse(Console.ReadLine()!);
+                bool validoCantidad = int.TryParse(Console.ReadLine(), out int cantidad);
+                if (!validoCantidad)
+                        {
+                        Console.WriteLine("Cantidad Invalida");
+                        return;
+                        }
 
                 Console.Write("Precio: ");
-                decimal precio = decimal.Parse(Console.ReadLine()!);
+                bool ValidoPrecio = decimal.TryParse(Console.ReadLine(), out decimal precio);
+                if (!ValidoPrecio)
+                        {
+                            Console.WriteLine("Precio invalido");
+                            return;
+                        }
 
                 Producto nuevoProducto = new Producto
                 {

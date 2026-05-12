@@ -19,5 +19,12 @@
     "Cantidad": 15,
     "Precio": 120000.0,
     "EnStock": true
+  },
+  {
+    "Nombre": "Laptop HP Victus 15/RTX2050",
+    "Categoria": "Electrodomesticos",
+    "Cantidad": 2,
+    "Precio": 2000000.0,
+    "EnStock": true
   }
 ]
