@@ -2,14 +2,14 @@
   {
     "Nombre": "Arroz",
     "Categoria": "Granos",
-    "Cantidad": 10,
+    "Cantidad": 1,
     "Precio": 4500.0,
-    "EnStock": false
+    "EnStock": true
   },
   {
     "Nombre": "Aceite",
     "Categoria": "Cocina",
-    "Cantidad": 8,
+    "Cantidad": 0,
     "Precio": 23400.0,
     "EnStock": false
   },

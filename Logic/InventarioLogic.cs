@@ -21,11 +21,18 @@ namespace InvetarioDeBodega.Logic
 
         public void AgregarProductos(Producto producto)
         {
+            
             Productos.Add(producto);
+             
+             ActualizarEstadoStock(producto);
 
             JsonService.GuardarProductos(Productos);
         }
-        // Obtener productos
+        // Obtener productos 
+         private void ActualizarEstadoStock(Producto producto)
+        {
+            producto.EnStock = producto.Cantidad > 0;
+        }
       public List<Producto> ObtenerProductos()        
         {
             return Productos;
@@ -37,5 +44,15 @@ namespace InvetarioDeBodega.Logic
             nombre.Trim().ToLower()
             );
         }
+        public void CambiarEstadoStock(string nombre)
+        {
+            Producto? producto = BuscarProductoPorNombre(nombre);
+            if (producto != null)
+            {
+                producto.EnStock = false;
+                JsonService.GuardarProductos(Productos);
+            }
+        }
+       
     }
 }

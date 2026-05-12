@@ -23,7 +23,8 @@ namespace InvetarioDeBodega.Menus
             Console.WriteLine("1. Agregar producto");
             Console.WriteLine("2. Mostrar productos");
             Console.WriteLine("3. Buscar producto");
-            Console.WriteLine("4. Salir");
+            Console.WriteLine("4. Cambiar de estado");
+            Console.WriteLine("0. Salir. ");
 
          string opcion =  Console.ReadLine()!;
 
@@ -68,6 +69,14 @@ namespace InvetarioDeBodega.Menus
                     Console.WriteLine($"Categoria: {producto.Categoria}");
                     Console.WriteLine($"Cantidad: {producto.Cantidad}");
                     Console.WriteLine($"Precio: {producto.Precio}");
+                    producto.EnStock = producto.Cantidad > 0;
+                    string estado =
+                    producto.EnStock
+                    ? "Disponible"
+                    : "Fuera de Stock";
+
+                   Console.WriteLine($"Estado: {estado}");
+                    
 
                    Console.WriteLine("----------------------");  
                    }
@@ -96,6 +105,16 @@ namespace InvetarioDeBodega.Menus
                     Console.ReadKey();
                 break;
                 case "4":
+                Console.Clear();
+                Console.WriteLine("=== FUERA DE STOCK ===\n");
+                Console.Write("Nombre del producto: ");
+                string NombreProducto = Console.ReadLine()!;
+                Invetario.CambiarEstadoStock(NombreProducto);
+                Console.WriteLine("\nProducto marcado fuera de stock.");
+                Console.ReadKey();
+                break;
+
+                case "0":
                 ejecutando = false;
                 break;
                 default:
