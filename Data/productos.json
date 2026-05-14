@@ -2,9 +2,9 @@
   {
     "Nombre": "Arroz",
     "Categoria": "Granos",
-    "Cantidad": 1,
+    "Cantidad": 15,
     "Precio": 4500.0,
-    "EnStock": false
+    "EnStock": true
   },
   {
     "Nombre": "Aceite",
@@ -16,7 +16,7 @@
   {
     "Nombre": "Ventilador",
     "Categoria": "Electrodomesticos",
-    "Cantidad": 15,
+    "Cantidad": 5,
     "Precio": 120000.0,
     "EnStock": true
   },

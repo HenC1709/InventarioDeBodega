@@ -1,18 +1,17 @@
-using System.Data.SqlTypes;
 using InvetarioDeBodega.Logic;
 using InvetarioDeBodega.Models;
 using InvetarioDeBodega.Helpers;
-using System.Runtime.CompilerServices;
+
 
 namespace InvetarioDeBodega.Menus
 {
     public class Menu
     {
-        private InvetarioLogic Invetario;
+        private InventarioLogic Invetario;
 
         public Menu()
         {
-            Invetario = new InvetarioLogic();
+            Invetario = new InventarioLogic();
         }
      public void MostrarMenu()
         {
@@ -26,6 +25,8 @@ namespace InvetarioDeBodega.Menus
             Console.WriteLine("2. Mostrar productos");
             Console.WriteLine("3. Buscar producto");
             Console.WriteLine("4. Cambiar de estado");
+            Console.WriteLine("5. Retirar Productos");
+            Console.WriteLine("6. Agregar Stock");
             Console.WriteLine("0. Salir. ");
 
          string opcion =  Console.ReadLine()!;
@@ -44,6 +45,12 @@ namespace InvetarioDeBodega.Menus
                 case "4":
                 CambiarEstadoStockMenu();
                 break;
+                case"5":
+                RetirarProductoMenu();
+                break;
+                case"6":
+                AgregarStockMenu();
+                break;
 
                 case "0":
                 ejecutando = false;
@@ -54,9 +61,6 @@ namespace InvetarioDeBodega.Menus
                 }
             }
         }
-
-
-
         private void AgregarProductoMenu()
         {
              Console.WriteLine("\n====Agregar Producto====\n");
@@ -131,7 +135,48 @@ namespace InvetarioDeBodega.Menus
             Console.WriteLine("\nProducto marcado fuera de stock.");
             Console.ReadKey();
         }
+       private void RetirarProductoMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("=== RETIRAR PRODUCTO ===\n");
 
+            string nombre = InputHelper.ReadString("Nombre del producto: ");
+
+            int cantidad = InputHelper.ReadInt("Cantidad a Retirar: ");
+
+            bool retiroExitoso = Invetario.RetirarProducto(nombre, cantidad);
+
+            if (retiroExitoso)
+            {
+                Console.WriteLine("\nRetiro exitoso. ");
+            }
+            else
+            {
+               Console.WriteLine("\nNo se pudo realizar el retiro. ");
+            }
+            Console.ReadKey();
+        }
+        private void AgregarStockMenu()
+        {
+             Console.Clear();
+            Console.WriteLine("=== AGREGAR STOCK ===\n");
+
+            string nombre = InputHelper.ReadString("Nombre del producto: ");
+
+            int cantidad = InputHelper.ReadInt("Cantidad a Ingresar: ");
+
+            bool AgregarExitoso = Invetario.AgregarStock(nombre, cantidad);
+
+            if (AgregarExitoso)
+            {
+                Console.WriteLine("\nSTOCK AGREGADO ");
+            }
+            else
+            {
+             Console.WriteLine("\nNo se pudo agregar stock.");
+             }  
+            Console.ReadKey();
+        }
     }
     
 }

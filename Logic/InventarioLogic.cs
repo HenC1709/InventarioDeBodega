@@ -4,14 +4,14 @@ using System.Linq;
 
 namespace InvetarioDeBodega.Logic
 {
-    public class InvetarioLogic
+    public class InventarioLogic
     {
         // Lista de inventario
         private List<Producto> Productos;
         // servicio Json
         private JsonService JsonService;
         // constructor
-        public InvetarioLogic()
+        public InventarioLogic()
         {
              JsonService = new JsonService();
 
@@ -53,6 +53,41 @@ namespace InvetarioDeBodega.Logic
                 JsonService.GuardarProductos(Productos);
             }
         }
-       
+       public bool RetirarProducto(string nombre, int cantidad)
+        {
+            Producto? producto = BuscarProductoPorNombre(nombre);
+
+            if (producto == null)
+            {
+                return false;
+            }
+            if (cantidad > producto.Cantidad)
+            {
+                return false;
+            }
+
+            producto.Cantidad -= cantidad;
+
+            ActualizarEstadoStock(producto);
+            JsonService.GuardarProductos(Productos);
+            return true;
+        }
+        public bool AgregarStock(string nombre, int cantidad)
+        {
+            Producto? producto = BuscarProductoPorNombre(nombre);
+             if (producto == null)
+            {
+                return false;
+            }
+            if (cantidad <= 0)
+            {
+                return false;
+            }
+            producto.Cantidad += cantidad;
+
+            ActualizarEstadoStock(producto);
+            JsonService.GuardarProductos(Productos);
+            return true;
+        }
     }
 }
