@@ -4,7 +4,7 @@
     "Categoria": "Granos",
     "Cantidad": 1,
     "Precio": 4500.0,
-    "EnStock": true
+    "EnStock": false
   },
   {
     "Nombre": "Aceite",
@@ -25,6 +25,13 @@
     "Categoria": "Electrodomesticos",
     "Cantidad": 2,
     "Precio": 2000000.0,
+    "EnStock": true
+  },
+  {
+    "Nombre": "Poco X6 Pro 512/12",
+    "Categoria": "Tecnologia/Movil",
+    "Cantidad": 5,
+    "Precio": 2100000.0,
     "EnStock": true
   }
 ]

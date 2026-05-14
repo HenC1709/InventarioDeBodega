@@ -1,6 +1,8 @@
 using System.Data.SqlTypes;
 using InvetarioDeBodega.Logic;
 using InvetarioDeBodega.Models;
+using InvetarioDeBodega.Helpers;
+using System.Runtime.CompilerServices;
 
 namespace InvetarioDeBodega.Menus
 {
@@ -31,97 +33,16 @@ namespace InvetarioDeBodega.Menus
          switch (opcion)
                 {
                 case "1":
-                Console.WriteLine("\n====Agregar Producto====\n");
-
-                Console.Write("Nombre: ");
-                string nombre = Console.ReadLine()!;
-
-                Console.Write("Categoria: ");
-                string categoria = Console.ReadLine()!;
-
-                Console.Write("Cantidad: ");
-                bool validoCantidad = int.TryParse(Console.ReadLine(), out int cantidad);
-                if (!validoCantidad)
-                        {
-                        Console.WriteLine("Cantidad Invalida");
-                        return;
-                        }
-
-                Console.Write("Precio: ");
-                bool ValidoPrecio = decimal.TryParse(Console.ReadLine(), out decimal precio);
-                if (!ValidoPrecio)
-                        {
-                            Console.WriteLine("Precio invalido");
-                            return;
-                        }
-
-                Producto nuevoProducto = new Producto
-                {
-                    Nombre = nombre,
-                    Categoria = categoria,
-                    Cantidad = cantidad,
-                    Precio = precio,
-                    EnStock = true
-                };
-                Invetario.AgregarProductos(nuevoProducto);
-                Console.WriteLine("\nProducto agregado Correctamente.");
-                Console.ReadKey();
+              AgregarProductoMenu();
                 break;
                 case "2":
-                Console.Clear();
-
-                Console.WriteLine("=== INVENTARIO ===\n");
-                List<Producto> productos = Invetario.ObtenerProductos();
-
-                foreach (var producto in productos)
-                   {
-                    Console.WriteLine($"Nombre: {producto.Nombre}");
-                    Console.WriteLine($"Categoria: {producto.Categoria}");
-                    Console.WriteLine($"Cantidad: {producto.Cantidad}");
-                    Console.WriteLine($"Precio: {producto.Precio}");
-                    producto.EnStock = producto.Cantidad > 0;
-                    string estado =
-                    producto.EnStock
-                    ? "Disponible"
-                    : "Fuera de Stock";
-
-                   Console.WriteLine($"Estado: {estado}");
-                    
-
-                   Console.WriteLine("----------------------");  
-                   }
-                   Console.ReadKey();
+              MostrarProductosMenu();
                 break;
                 case "3":
-                Console.WriteLine("==== Buscar Producto ===\n");
-
-                Console.Write("Ingrese el nombre: ");
-                string Nombre = Console.ReadLine()!;
-
-                Producto? productoEncontrado = Invetario.BuscarProductoPorNombre(Nombre);
-                if (productoEncontrado != null)
-                    {
-                     Console.WriteLine("\nPRODUCTO ENCONTRADO:\n");
-
-                     Console.WriteLine($"Nombre: {productoEncontrado.Nombre}");
-                     Console.WriteLine($"Categoria: {productoEncontrado.Categoria}");
-                     Console.WriteLine($"Cantidad: {productoEncontrado.Cantidad}");
-                     Console.WriteLine($"Precio: {productoEncontrado.Precio}");        
-                    }
-                else
-                    {
-                     Console.WriteLine("\nProducto no encontrado. ");       
-                    } 
-                    Console.ReadKey();
+              BuscarProductoMenu();
                 break;
                 case "4":
-                Console.Clear();
-                Console.WriteLine("=== FUERA DE STOCK ===\n");
-                Console.Write("Nombre del producto: ");
-                string NombreProducto = Console.ReadLine()!;
-                Invetario.CambiarEstadoStock(NombreProducto);
-                Console.WriteLine("\nProducto marcado fuera de stock.");
-                Console.ReadKey();
+                CambiarEstadoStockMenu();
                 break;
 
                 case "0":
@@ -132,6 +53,83 @@ namespace InvetarioDeBodega.Menus
                 break;
                 }
             }
+        }
+
+
+
+        private void AgregarProductoMenu()
+        {
+             Console.WriteLine("\n====Agregar Producto====\n");
+
+             string nombre = InputHelper.ReadString("Nombre: ");       
+             string categoria = InputHelper.ReadString("categoria: ");    
+             int cantidad = InputHelper.ReadInt("Cantidad: ");
+             decimal precio = InputHelper.ReadDecimal("Precio: ");
+
+                Producto nuevoProducto = new Producto
+                {
+                    Nombre = nombre,
+                    Categoria = categoria,
+                    Cantidad = cantidad,
+                    Precio = precio,
+                    EnStock = true
+                };
+              Invetario.AgregarProductos(nuevoProducto);
+              Console.WriteLine("\nProducto agregado Correctamente.");
+               Console.ReadKey();
+        }
+
+       private void MostrarProductosMenu()
+        {
+          Console.Clear();
+          Console.WriteLine("=== INVENTARIO ===\n");
+         List<Producto> productos = Invetario.ObtenerProductos();
+        foreach (var producto in productos)
+           {
+             Console.WriteLine($"Nombre: {producto.Nombre}");                    Console.WriteLine($"Categoria: {producto.Categoria}");
+             Console.WriteLine($"Cantidad: {producto.Cantidad}");
+             Console.WriteLine($"Precio: {producto.Precio}");
+            producto.EnStock = producto.Cantidad > 0;
+            string estado =
+            producto.EnStock
+            ? "Disponible"
+            : "Fuera de Stock";
+            Console.WriteLine($"Estado: {estado}");        
+           Console.WriteLine("----------------------");  
+           }
+           Console.ReadKey();
+        }
+        private void BuscarProductoMenu()
+        {
+            Console.WriteLine("==== Buscar Producto ===\n");
+
+                Console.Write("Ingrese el nombre: ");
+                string Nombre = Console.ReadLine()!;
+
+                Producto? productoEncontrado = Invetario.BuscarProductoPorNombre(Nombre);
+                if (productoEncontrado != null)
+                {
+               Console.WriteLine("\nPRODUCTO ENCONTRADO:\n");
+               Console.WriteLine($"Nombre: {productoEncontrado.Nombre}");
+               Console.WriteLine($"Categoria: {productoEncontrado.Categoria}");
+               Console.WriteLine($"Cantidad: {productoEncontrado.Cantidad}");
+               Console.WriteLine($"Precio: {productoEncontrado.Precio}");        
+                }
+                else
+                 {
+              Console.WriteLine("\nProducto no encontrado. ");       
+                 } 
+              Console.ReadKey();
+        }
+        private void CambiarEstadoStockMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("=== FUERA DE STOCK ===\n");
+            Console.Write("Nombre del producto: ");
+            string NombreProducto = Console.ReadLine()!;
+            Invetario.CambiarEstadoStock(NombreProducto);
+            Console.WriteLine("\nProducto marcado fuera de stock.");
+            Console.ReadKey();
         }
 
     }
