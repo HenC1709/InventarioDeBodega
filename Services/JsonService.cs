@@ -1,8 +1,8 @@
 using Newtonsoft.Json;
-using InvetarioDeBodega.Models;
+using InventarioDeBodega.Models;
 using System.Text.Json.Serialization;
 
-namespace InvetarioDeBodega.Services
+namespace InventarioDeBodega.Services
 {
     public class JsonService
     {

@@ -1,4 +1,4 @@
-namespace InvetarioDeBodega.Helpers
+namespace InventarioDeBodega.Helpers
 {
     public static class InputHelper
     {

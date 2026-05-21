@@ -1,4 +1,4 @@
-namespace InvetarioDeBodega.Models
+namespace InventarioDeBodega.Models
 {
     public class Producto
     {

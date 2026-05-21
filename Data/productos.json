@@ -2,9 +2,9 @@
   {
     "Nombre": "Arroz",
     "Categoria": "Granos",
-    "Cantidad": 15,
+    "Cantidad": 0,
     "Precio": 4500.0,
-    "EnStock": true
+    "EnStock": false
   },
   {
     "Nombre": "Aceite",
@@ -14,10 +14,10 @@
     "EnStock": false
   },
   {
-    "Nombre": "Ventilador",
-    "Categoria": "Electrodomesticos",
-    "Cantidad": 5,
-    "Precio": 120000.0,
+    "Nombre": "Aire Acondicionado mini Split 12000BTU",
+    "Categoria": "Refrigeración",
+    "Cantidad": 8,
+    "Precio": 1500000.0,
     "EnStock": true
   },
   {

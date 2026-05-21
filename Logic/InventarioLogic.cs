@@ -1,8 +1,8 @@
-using InvetarioDeBodega.Models;
-using InvetarioDeBodega.Services;
+using InventarioDeBodega.Services;
+using InventarioDeBodega.Models;
 using System.Linq;
 
-namespace InvetarioDeBodega.Logic
+namespace InventarioDeBodega.Logic
 {
     public class InventarioLogic
     {
@@ -19,14 +19,20 @@ namespace InvetarioDeBodega.Logic
         }
         //Agregar Productos
 
-        public void AgregarProductos(Producto producto)
+        public bool AgregarProductos(Producto producto)
         {
-            
+            Producto? existente = BuscarProductoPorNombre(producto.Nombre);
+            if (existente != null)
+            {
+                return false;
+            }
+
             Productos.Add(producto);
              
              ActualizarEstadoStock(producto);
 
             JsonService.GuardarProductos(Productos);
+            return true;
         }
         // Obtener productos 
          private void ActualizarEstadoStock(Producto producto)
@@ -84,6 +90,26 @@ namespace InvetarioDeBodega.Logic
                 return false;
             }
             producto.Cantidad += cantidad;
+
+            ActualizarEstadoStock(producto);
+            JsonService.GuardarProductos(Productos);
+            return true;
+        }
+        public bool EditarProducto(string nombreActual,
+    string nuevoNombre,
+    string nuevaCategoria,
+    int nuevaCantidad,
+    decimal nuevoPrecio)
+        {
+            Producto? producto = BuscarProductoPorNombre(nombreActual);
+            if (producto == null)
+            {
+                return false;
+            }
+            producto.Nombre = nuevoNombre;
+            producto.Categoria = nuevaCategoria;
+            producto.Cantidad = nuevaCantidad;
+            producto.Precio = nuevoPrecio;
 
             ActualizarEstadoStock(producto);
             JsonService.GuardarProductos(Productos);
