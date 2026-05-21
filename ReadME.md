@@ -1,6 +1,6 @@
-# 📦 SistemaInventarioBodega — V1 Alpha
+# 📦 SistemaInventarioBodega — V1 Beta Temprana
 
-Primer prototipo funcional del sistema de inventario en consola usando C# y persistencia JSON.
+Sistema de inventario en consola desarrollado en C# con arquitectura modular, persistencia JSON y manejo básico de stock.
 
 ---
 
@@ -8,7 +8,7 @@ Primer prototipo funcional del sistema de inventario en consola usando C# y pers
 
 ## 🧱 Arquitectura modular
 
-Estructura organizada por capas:
+El proyecto se encuentra separado por responsabilidades:
 
 * Models
 * Logic
@@ -31,13 +31,14 @@ SistemaInventarioBodega/
 │   └── Producto.cs
 │
 ├── Logic/
-│   └── InvetarioLogic.cs
+│   └── InventarioLogic.cs
 │
 ├── Services/
 │   └── JsonService.cs
 │
 ├── Helpers/
-│   └── InputHelper.cs
+│   ├── InputHelper.cs
+│   └── ConsoleHelper.cs
 │
 ├── Menus/
 │   └── Menu.cs
@@ -61,7 +62,7 @@ SistemaInventarioBodega/
 
 # 💾 Persistencia JSON
 
-Sistema conectado a:
+Persistencia conectada a:
 
 ```txt
 Data/productos.json
@@ -80,9 +81,12 @@ Funciones implementadas:
 Opciones actuales:
 
 * Agregar productos
-* Mostrar inventario
+* Mostrar productos
 * Buscar productos
 * Cambiar estado de stock
+* Retirar productos
+* Agregar stock
+* Editar productos
 * Salir
 
 ---
@@ -93,32 +97,79 @@ Opciones actuales:
 
 Creación dinámica desde consola.
 
+Incluye:
+
+* Validación reutilizable
+* Prevención de productos duplicados
+
+---
+
 ## ✔ Mostrar inventario
 
 Listado completo de productos guardados.
+
+Incluye:
+
+* Validación de inventario vacío
+* Estado visual de stock
+
+---
 
 ## ✔ Buscar productos
 
 Búsqueda por nombre.
 
-## ✔ Estado de stock
+Incluye:
 
-Sistema básico de disponibilidad:
+* Información detallada
+* Estado visual del producto
+
+---
+
+## ✔ Editar productos
+
+Permite modificar:
+
+* Nombre
+* Categoría
+* Cantidad
+* Precio
+
+Actualizando automáticamente el estado de stock.
+
+---
+
+## ✔ Manejo de stock
+
+Funciones implementadas:
+
+* Retirar stock
+* Agregar stock
+* Actualización automática de disponibilidad
+
+Sistema actual:
 
 ```txt
 Cantidad > 0 → Disponible
 Cantidad <= 0 → Fuera de Stock
 ```
 
-## ✔ Validaciones reutilizables
+---
+
+# 🎨 Mejoras visuales
 
 Uso de:
 
-* ReadInt()
-* ReadDecimal()
-* ReadString()
+```txt
+ConsoleHelper
+```
 
-para evitar errores de entrada y crashes.
+para centralizar:
+
+* Títulos
+* Mensajes de éxito
+* Advertencias
+* Errores
 
 ---
 
@@ -139,8 +190,9 @@ Controla:
 Controla:
 
 * reglas del inventario
-* stock
 * búsquedas
+* stock
+* edición
 * manipulación de productos
 
 ---
@@ -160,6 +212,7 @@ Controla:
 
 * validaciones reutilizables
 * inputs seguros
+* mensajes visuales
 
 ---
 
@@ -182,34 +235,29 @@ dotnet run
 # 📌 Estado actual del proyecto
 
 ```txt
-V1 Alpha Avanzada / Camino a Beta
+V1 Beta Temprana
 ```
 
 El sistema actualmente cuenta con:
 
 * arquitectura modular
 * persistencia JSON
-* menú modular
-* validaciones robustas
+* CRUD casi completo
+* manejo de stock
+* edición de productos
+* validaciones reutilizables
+* prevención de duplicados
+* UX visual mejorada
 * flujo de consola estable
-* lógica de stock
-* código más mantenible
 
 ---
 
-# 🚀 Próximos objetivos (Beta)
+# 🚀 Próximos objetivos
 
-* Editar productos
-* Ticket de retiro
-* Soft delete real
-* Mejorar UX consola
-* Filtros y búsqueda avanzada
-* Mejor manejo visual de stock
-* Refactor adicional de lógica
-* Sistema de carrito/caja (V2 futura)
- 
- # ✅ añadidos 13/05/26
- 
- * Retirar stock
- * añadir stock
- 
+* Soft delete
+* Tickets TXT
+* Reportes simples
+* Mejoras visuales adicionales
+* Refactor pequeño de lógica
+* Búsquedas avanzadas
+* Filtros básicos
