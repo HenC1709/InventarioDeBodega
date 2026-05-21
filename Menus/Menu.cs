@@ -108,9 +108,6 @@ namespace InventarioDeBodega.Menus
               Console.WriteLine($"Categoria: {producto.Categoria}");
              Console.WriteLine($"Cantidad: {producto.Cantidad}");
              Console.WriteLine($"Precio: {producto.Precio}");
-            string estado = producto.EnStock
-            ? "Disponible"
-            : "Fuera de Stock";
             if (producto.EnStock)
                 {
                  ConsoleHelper.Success("Estado: Disponible");    
@@ -137,16 +134,16 @@ namespace InventarioDeBodega.Menus
                Console.WriteLine($"Categoria: {productoEncontrado.Categoria}");
                Console.WriteLine($"Cantidad: {productoEncontrado.Cantidad}");
                Console.WriteLine($"Precio: {productoEncontrado.Precio}");  
-               string estado = productoEncontrado.EnStock 
-               ? "Disponible"
-               : "Fuera de stock";
-               ConsoleHelper.Success($"Estado: {estado}");      
+               if (productoEncontrado.EnStock)
+                {
+                 ConsoleHelper.Success("Estado: Disponible");    
                 }
                 else
-                 {
-              ConsoleHelper.Error("\nProducto no encontrado. ");       
-                 } 
+                {
+                 ConsoleHelper.Warning("Estado: Fuera de stock");   
+                } 
               Console.ReadKey();
+            }
         }
         private void CambiarEstadoStockMenu()
         {
