@@ -4,34 +4,55 @@
     "Categoria": "Granos",
     "Cantidad": 0,
     "Precio": 4500.0,
-    "EnStock": false
+    "EnStock": false,
+    "Activo": false
   },
   {
     "Nombre": "Aceite",
     "Categoria": "Cocina",
     "Cantidad": 0,
     "Precio": 23400.0,
-    "EnStock": false
+    "EnStock": false,
+    "Activo": false
   },
   {
     "Nombre": "Aire Acondicionado mini Split 12000BTU",
     "Categoria": "Refrigeración",
     "Cantidad": 8,
     "Precio": 1500000.0,
-    "EnStock": true
+    "EnStock": true,
+    "Activo": true
   },
   {
     "Nombre": "Laptop HP Victus 15/RTX2050",
     "Categoria": "Electrodomesticos",
     "Cantidad": 2,
     "Precio": 2000000.0,
-    "EnStock": true
+    "EnStock": true,
+    "Activo": true
   },
   {
     "Nombre": "Poco X6 Pro 512/12",
     "Categoria": "Tecnologia/Movil",
     "Cantidad": 5,
     "Precio": 2100000.0,
-    "EnStock": true
+    "EnStock": true,
+    "Activo": true
+  },
+  {
+    "Nombre": "Coca-Cola 2L",
+    "Categoria": "Bebidas",
+    "Cantidad": 498,
+    "Precio": 6.00,
+    "EnStock": true,
+    "Activo": true
+  },
+  {
+    "Nombre": "Sprite 2L",
+    "Categoria": "Bebidas",
+    "Cantidad": 0,
+    "Precio": 12.00,
+    "EnStock": false,
+    "Activo": false
   }
 ]

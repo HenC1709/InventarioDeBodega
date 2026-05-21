@@ -7,5 +7,6 @@ namespace InventarioDeBodega.Models
        public int Cantidad { get; set; }
        public decimal Precio { get; set; }
        public bool EnStock { get; set; }
+       public bool Activo { get; set; } = true;
     }
 }
