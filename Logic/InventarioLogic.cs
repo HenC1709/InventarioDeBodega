@@ -38,6 +38,8 @@ namespace InventarioDeBodega.Logic
          private void ActualizarEstadoStock(Producto producto)
         {
             producto.EnStock = producto.Cantidad > 0;
+
+            producto.Activo = producto.Cantidad > 0;
         }
       public List<Producto> ObtenerProductos()        
         {
@@ -56,6 +58,7 @@ namespace InventarioDeBodega.Logic
             if (producto != null)
             {
                 producto.EnStock = false;
+                producto.Activo = false;
                 JsonService.GuardarProductos(Productos);
             }
         }
@@ -71,9 +74,9 @@ namespace InventarioDeBodega.Logic
             {
                 return false;
             }
-
+        
             producto.Cantidad -= cantidad;
-
+            
             ActualizarEstadoStock(producto);
             JsonService.GuardarProductos(Productos);
             return true;

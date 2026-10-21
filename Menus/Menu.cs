@@ -1,6 +1,7 @@
 using InventarioDeBodega.Logic;
 using InventarioDeBodega.Models;
 using InventarioDeBodega.Helpers;
+using InventarioDeBodega.Services;
 namespace InventarioDeBodega.Menus
 {
     public class Menu
@@ -65,10 +66,11 @@ namespace InventarioDeBodega.Menus
         }
         private void AgregarProductoMenu()
         {
+            Console.Clear();
              ConsoleHelper.Title("\nAgregar Producto\n");
 
              string nombre = InputHelper.ReadString("Nombre: ");       
-             string categoria = InputHelper.ReadString("categoria: ");    
+             string categoria = InputHelper.ReadString("Categoria: ");    
              int cantidad = InputHelper.ReadInt("Cantidad: ");
              decimal precio = InputHelper.ReadDecimal("Precio: ");
 
@@ -104,6 +106,10 @@ namespace InventarioDeBodega.Menus
             }
         foreach (var producto in productos)
            {
+            if (!producto.Activo)
+            {
+                continue;
+            }
              Console.WriteLine($"Nombre: {producto.Nombre}");                   
               Console.WriteLine($"Categoria: {producto.Categoria}");
              Console.WriteLine($"Cantidad: {producto.Cantidad}");
@@ -125,7 +131,7 @@ namespace InventarioDeBodega.Menus
             ConsoleHelper.Title("==== Buscar Producto ===\n");
 
                 string Nombre = InputHelper.ReadString("Ingrese el nombre: ");
-
+                
                 Producto? productoEncontrado = Inventario.BuscarProductoPorNombre(Nombre);
                 if (productoEncontrado != null)
                 {
@@ -163,16 +169,18 @@ namespace InventarioDeBodega.Menus
 
             int cantidad = InputHelper.ReadInt("Cantidad a Retirar: ");
 
-            bool retiroExitoso = Inventario.RetirarProducto(nombre, cantidad);
-
-            if (retiroExitoso)
+            bool retiroExito = Inventario.RetirarProducto(nombre, cantidad);
+            if (retiroExito)
             {
-                Console.WriteLine("\nRetiro exitoso. ");
+                TicketService _ticket = new TicketService();
+                _ticket.GenerarTicket(nombre, cantidad);
+                ConsoleHelper.Success("\nRetiro Exitoso.");
             }
-            else
+            else 
             {
-               Console.WriteLine("\nNo se pudo realizar el retiro. ");
+                Console.WriteLine("\nNo se pudo realizar el pedido.");
             }
+            
             Console.ReadKey();
         }
         private void AgregarStockMenu()

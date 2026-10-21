@@ -1,6 +1,12 @@
-# 📦 SistemaInventarioBodega — V1 Beta Temprana
+# 📦 SistemaInventarioBodega — README ACTUALIZADO
 
-Sistema de inventario en consola desarrollado en C# con arquitectura modular, persistencia JSON y manejo básico de stock.
+# 🚀 Estado actual del proyecto
+
+```txt
+V1 Beta Temprana
+```
+
+Sistema de inventario en consola desarrollado en C# usando arquitectura modular, persistencia JSON y manejo de movimientos de bodega.
 
 ---
 
@@ -8,7 +14,7 @@ Sistema de inventario en consola desarrollado en C# con arquitectura modular, pe
 
 ## 🧱 Arquitectura modular
 
-El proyecto se encuentra separado por responsabilidades:
+Separación del proyecto por responsabilidades:
 
 * Models
 * Logic
@@ -16,16 +22,19 @@ El proyecto se encuentra separado por responsabilidades:
 * Menus
 * Helpers
 * Data
+* Tickets
 
 ---
 
-# 📂 Estructura del proyecto
+# 📂 Estructura actual
 
 ```txt
 SistemaInventarioBodega/
 │
 ├── Data/
 │   └── productos.json
+│
+├── Tickets/
 │
 ├── Models/
 │   └── Producto.cs
@@ -34,11 +43,15 @@ SistemaInventarioBodega/
 │   └── InventarioLogic.cs
 │
 ├── Services/
-│   └── JsonService.cs
+│   ├── JsonService.cs
+│   └── TicketService.cs
 │
 ├── Helpers/
 │   ├── InputHelper.cs
 │   └── ConsoleHelper.cs
+│
+├── Utils/
+│   └── Validaciones.cs
 │
 ├── Menus/
 │   └── Menu.cs
@@ -57,6 +70,7 @@ SistemaInventarioBodega/
 * Cantidad
 * Precio
 * EnStock
+* Activo
 
 ---
 
@@ -68,7 +82,7 @@ Persistencia conectada a:
 Data/productos.json
 ```
 
-Funciones implementadas:
+Funciones actuales:
 
 * Guardar productos
 * Cargar productos automáticamente
@@ -78,7 +92,7 @@ Funciones implementadas:
 
 # 🖥️ Menú interactivo
 
-Opciones actuales:
+Opciones implementadas:
 
 * Agregar productos
 * Mostrar productos
@@ -95,34 +109,32 @@ Opciones actuales:
 
 ## ✔ Agregar productos
 
-Creación dinámica desde consola.
-
 Incluye:
 
-* Validación reutilizable
+* Validaciones reutilizables
 * Prevención de productos duplicados
 
 ---
 
 ## ✔ Mostrar inventario
 
-Listado completo de productos guardados.
-
 Incluye:
 
 * Validación de inventario vacío
 * Estado visual de stock
+* Ocultamiento automático de productos agotados
 
 ---
 
 ## ✔ Buscar productos
 
-Búsqueda por nombre.
+Muestra:
 
-Incluye:
-
-* Información detallada
-* Estado visual del producto
+* Nombre
+* Categoría
+* Cantidad
+* Precio
+* Estado
 
 ---
 
@@ -135,8 +147,6 @@ Permite modificar:
 * Cantidad
 * Precio
 
-Actualizando automáticamente el estado de stock.
-
 ---
 
 ## ✔ Manejo de stock
@@ -145,14 +155,30 @@ Funciones implementadas:
 
 * Retirar stock
 * Agregar stock
-* Actualización automática de disponibilidad
+* Actualización automática de estado
 
-Sistema actual:
+Regla actual:
 
 ```txt
-Cantidad > 0 → Disponible
-Cantidad <= 0 → Fuera de Stock
+Cantidad > 0 → Activo
+Cantidad <= 0 → Oculto del inventario visible
 ```
+
+---
+
+# 🎟️ Sistema de tickets TXT
+
+Cada retiro exitoso genera automáticamente:
+
+```txt
+Tickets/ticket_fecha_hora.txt
+```
+
+Incluyendo:
+
+* Producto retirado
+* Cantidad retirada
+* Fecha y hora
 
 ---
 
@@ -164,7 +190,7 @@ Uso de:
 ConsoleHelper
 ```
 
-para centralizar:
+para manejar:
 
 * Títulos
 * Mensajes de éxito
@@ -179,9 +205,9 @@ para centralizar:
 
 Controla:
 
-* flujo de consola
-* interacción con usuario
+* interacción usuario
 * navegación
+* visualización
 
 ---
 
@@ -189,8 +215,7 @@ Controla:
 
 Controla:
 
-* reglas del inventario
-* búsquedas
+* reglas de negocio
 * stock
 * edición
 * manipulación de productos
@@ -201,8 +226,9 @@ Controla:
 
 Controla:
 
-* lectura JSON
-* guardado JSON
+* JSON
+* tickets TXT
+* persistencia
 
 ---
 
@@ -210,9 +236,18 @@ Controla:
 
 Controla:
 
-* validaciones reutilizables
+* validaciones de entrada
 * inputs seguros
-* mensajes visuales
+* visuales consola
+
+---
+
+## 📌 Utils
+
+Preparado para:
+
+* validaciones de negocio
+* reglas futuras
 
 ---
 
@@ -232,32 +267,20 @@ dotnet run
 
 ---
 
-# 📌 Estado actual del proyecto
+# 🔥 Estado actual REAL
 
-```txt
-V1 Beta Temprana
-```
+El proyecto actualmente cuenta con:
 
-El sistema actualmente cuenta con:
-
-* arquitectura modular
-* persistencia JSON
-* CRUD casi completo
-* manejo de stock
-* edición de productos
-* validaciones reutilizables
-* prevención de duplicados
-* UX visual mejorada
-* flujo de consola estable
+✅ Arquitectura modular
+✅ Persistencia JSON
+✅ CRUD casi completo
+✅ Manejo de stock
+✅ Edición de productos
+✅ Prevención de duplicados
+✅ Tickets TXT automáticos
+✅ Validaciones reutilizables
+✅ UX visual mejorada
+✅ Flujo operativo de bodega
+✅ Ocultamiento automático de stock agotado
 
 ---
-
-# 🚀 Próximos objetivos
-
-* Soft delete
-* Tickets TXT
-* Reportes simples
-* Mejoras visuales adicionales
-* Refactor pequeño de lógica
-* Búsquedas avanzadas
-* Filtros básicos
