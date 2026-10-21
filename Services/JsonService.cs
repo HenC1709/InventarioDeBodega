@@ -1,6 +1,5 @@
 using Newtonsoft.Json;
 using InventarioDeBodega.Models;
-using System.Text.Json.Serialization;
 
 namespace InventarioDeBodega.Services
 {
